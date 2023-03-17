@@ -1,12 +1,19 @@
 from collections import Counter 
 
-n = int(input())
-l = list()
+def word_order():
+    # n represents the number of words that are passed in the function
+    n = int(input())
+    l = list()
 
-for _ in range(n):
-    l.append(input())
+    
+    for _ in range(n):
+        l.append(input())
 
-x = Counter(l)
+    # serializes the list in order
+    x = Counter(l)
 
-print(len(x))
-print(x)
+    #prints th number of distinct words
+    print(len(x))
+
+    #prints the occurrence of each distinct word
+    print(x)
