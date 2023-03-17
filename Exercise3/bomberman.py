@@ -1,43 +1,45 @@
 def bomber_man(n, grid):
-    rows = len(grid)
-    cols = len(grid[0])
-    
-    def detonate(bombs):
-        for pos in bombs:
-            r, c = pos
-            grid[r][c] = '.'
-            for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-                nr, nc = r + dr, c + dc
-                if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] != 'O':
-                    grid[nr][nc] = '.'
-                    
-    def plant_bombs():
-        bombs = []
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c] == '.':
-                    grid[r][c] = 'O'
-                    bombs.append((r, c))
-        return bombs
-    
+    r, c = len(grid), len(grid[0])
     if n == 1:
         return grid
-    
+
+    # All cells filled with bombs
     if n % 2 == 0:
-        grid = [['O'] * cols for _ in range(rows)]
-        return grid
-    
-    bombs = plant_bombs()
-    detonate(bombs)
-    
-    bombs = plant_bombs()
-    detonate(bombs)
-    
-    for i in range(5, n + 1, 2):
-        bombs = plant_bombs()
-        detonate(bombs)
-        
-        bombs = plant_bombs()
-        detonate(bombs)
-    
-    return grid
+        return ['O' * c for i in range(r)]
+
+    # Alternate states
+    n //= 2
+    for q in range((n + 1) % 2 + 1):
+        newgrid = [['O'] * c for i in range(r)]
+
+        # Function for detonation
+        def set(x, y):
+            if 0 <= x < r and 0 <= y < c:
+                newgrid[x][y] = '.'
+
+        xi = [0, 0, 0, 1, -1]
+        yi = [0, -1, 1, 0, 0]
+
+        for x in range(r):
+            for y in range(c):
+                if grid[x][y] == 'O':
+                    for i, j in zip(xi, yi):
+                        set(x + i, y + j)
+
+        grid = newgrid
+
+    # Convert result back to strings
+    return ["".join(x) for x in grid]
+
+
+n = 3
+grid = [
+    ['.','.','.','.','.','.'],
+    ['.','.','.','O','.','.'],
+    ['.','.','.','.','O','.'],
+    ['.','.','.','.','.','.'],
+    ['O','O','.','.','.','.'],
+    ['O','O','.','.','.','.']
+]
+
+print(bomber_man(n, grid))
