@@ -12,5 +12,7 @@ The app keeps track of the mappings between short URLs and long URLs in a dictio
 
 ## Dependencies
 Flask: The web framework used to build the app.
+
 Random: Used to generate random IDs for short URLs.
+
 String: Used to generate random IDs for short URLs.
