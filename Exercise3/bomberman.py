@@ -31,15 +31,3 @@ def bomber_man(n, grid):
     # Convert result back to strings
     return ["".join(x) for x in grid]
 
-
-n = 3
-grid = [
-    ['.','.','.','.','.','.'],
-    ['.','.','.','O','.','.'],
-    ['.','.','.','.','O','.'],
-    ['.','.','.','.','.','.'],
-    ['O','O','.','.','.','.'],
-    ['O','O','.','.','.','.']
-]
-
-print(bomber_man(n, grid))
