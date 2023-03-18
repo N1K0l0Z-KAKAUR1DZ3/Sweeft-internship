@@ -16,11 +16,14 @@ def bigger_is_greater(w):
     
         w[i], w[j] = w[j], w[i]
         w="".join(w)
-        result = w[:1+1] + w[i+1:][::-1]
-        
-    #dkhc
-    # else, i=d and j=c (last char)
-    # after swap: hkdc
-    # after reverse : hcdk
+        result = w[:i+1] + w[i+1:][::-1]
 
     return result
+
+
+print(bigger_is_greater('lmno'))  # lmon
+print(bigger_is_greater('dcba'))  # no answer
+print(bigger_is_greater('dcbb'))  # no answer
+print(bigger_is_greater('abdc'))  # acbd
+print(bigger_is_greater('abcd'))  # abdc
+print(bigger_is_greater('fedcbabcd'))  # fedcbabdc
